@@ -1,0 +1,271 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Fresh Studio Хабаровск</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Детейлинг-студия Fresh Studio в Хабаровске: оклейка цветной плёнкой, полировка, керамика, химчистка. Лучистая, 101.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Golos+Text:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="top" id="top">
+  <div class="top__in">
+    <a class="logo" href="#hero" aria-label="Fresh Studio, наверх">
+      <span class="logo__word">Fresh</span><span class="logo__sub">studio</span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="#wrap">Оклейка</a>
+      <a href="#services">Услуги</a>
+      <a href="#works">Работы</a>
+      <a href="#process">Как работаем</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <a class="btn btn--film top__cta" href="https://t.me/freshstudio27" target="_blank" rel="noopener">Написать в Telegram</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" aria-label="Открыть меню"><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO: веер плёнок -->
+  <section class="hero" id="hero">
+    <div class="hero__in">
+      <div class="hero__text">
+        <p class="hero__place">Детейлинг в Хабаровске, Лучистая, 101</p>
+        <h1 class="hero__title" id="heroTitle">Перекрасим машину, не трогая краску</h1>
+        <p class="hero__lead">Оклеиваем кузов цветной плёнкой, полируем, наносим керамику и чистим салон. Заводской лак остаётся под плёнкой целым.</p>
+        <div class="hero__actions">
+          <a class="btn btn--film" href="https://t.me/freshstudio27" target="_blank" rel="noopener">Прислать фото и узнать цену</a>
+          <a class="btn btn--line" href="#works">Смотреть работы</a>
+        </div>
+        <p class="hero__hint" id="fanHint">Выберите плёнку на веере, чтобы увидеть машину, которую мы в неё оклеили.</p>
+      </div>
+
+      <div class="hero__stage">
+        <figure class="shot" id="shot">
+          <img class="shot__img is-on" id="shotA" src="assets/images/harrier-pink.jpg" alt="Toyota Harrier в розовой глянцевой плёнке в боксе студии" width="1024" height="1024">
+          <img class="shot__img" id="shotB" src="assets/images/harrier-pink.jpg" alt="" width="1024" height="1024" aria-hidden="true">
+          <span class="shot__sheen" aria-hidden="true"></span>
+          <figcaption class="shot__cap"><b id="capCar">Toyota Harrier</b><span id="capFilm">розовый глянец</span></figcaption>
+        </figure>
+
+        <div class="fan" id="fan" role="group" aria-label="Цвета плёнки из наших работ">
+          <button class="fan__strip" type="button" data-i="0" aria-pressed="true"><span>Розовый глянец</span></button>
+          <button class="fan__strip" type="button" data-i="1" aria-pressed="false"><span>Хамелеон</span></button>
+          <button class="fan__strip" type="button" data-i="2" aria-pressed="false"><span>Изумруд</span></button>
+          <button class="fan__strip" type="button" data-i="3" aria-pressed="false"><span>Песочный</span></button>
+          <button class="fan__strip" type="button" data-i="4" aria-pressed="false"><span>Мат графит</span></button>
+          <span class="fan__pin" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОКЛЕЙКА: мат или глянец -->
+  <section class="wrap" id="wrap" aria-labelledby="wrapTitle">
+    <div class="wrap__in">
+      <div class="finish">
+        <div class="finish__pic">
+          <img id="finishImg" src="assets/images/a-class-hood.jpg" alt="Капот Mercedes A-класса в глянцевой плёнке хамелеон" width="1050" height="1400" loading="lazy">
+          <span class="finish__glare" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="wrap__text">
+        <h2 class="h2" id="wrapTitle">Смена цвета плёнкой</h2>
+        <p class="wrap__lead">Цена на примере Mercedes A-класса, кузов целиком. Выберите фактуру:</p>
+
+        <div class="switch" role="radiogroup" aria-label="Фактура плёнки">
+          <button class="switch__opt" type="button" role="radio" aria-checked="true" data-finish="gloss">Глянец</button>
+          <button class="switch__opt" type="button" role="radio" aria-checked="false" data-finish="matte">Мат</button>
+          <span class="switch__thumb" aria-hidden="true"></span>
+        </div>
+
+        <p class="price"><span class="price__num" id="priceNum">110 000</span><span class="price__cur">₽</span></p>
+        <p class="price__note" id="priceNote">Глянец отражает свет как свежий лак, оттенок играет на изгибах кузова.</p>
+
+        <div class="did">
+          <h3 class="h3">Что ещё сделали на этой машине</h3>
+          <ul class="did__list">
+            <li>Оклеили кузов в цветную защитную плёнку</li>
+            <li>Сделали антихром оконных молдингов</li>
+            <li>Притемнили передние и задние фары</li>
+          </ul>
+        </div>
+        <a class="btn btn--film" href="https://t.me/freshstudio27" target="_blank" rel="noopener">Рассчитать мою машину</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- УСЛУГИ -->
+  <section class="services" id="services" aria-labelledby="servTitle">
+    <div class="services__in">
+      <div class="services__head">
+        <h2 class="h2" id="servTitle">Что делаем</h2>
+        <p>Цену остальных работ назовём по фото: пришлите в Telegram пару снимков машины и что хотите поменять.</p>
+      </div>
+      <ul class="svc">
+        <li class="svc__row">
+          <h3 class="svc__name">Оклейка цветной плёнкой</h3>
+          <p class="svc__what">Новый цвет кузова без покраски. Глянец, мат, хамелеон. Плёнку можно снять, и под ней будет родной лак.</p>
+          <p class="svc__price">90 000–110 000 ₽ <small>на примере A-класса</small></p>
+        </li>
+        <li class="svc__row">
+          <h3 class="svc__name">Полировка кузова</h3>
+          <p class="svc__what">Убираем паутинку, голограммы и мелкие царапины, возвращаем глубину цвета.</p>
+          <p class="svc__price">по фото</p>
+        </li>
+        <li class="svc__row">
+          <h3 class="svc__name">Керамика</h3>
+          <p class="svc__what">Защитный состав поверх лака: грязь держится хуже, машина моется легче, блеск сохраняется дольше.</p>
+          <p class="svc__price">по фото</p>
+        </li>
+        <li class="svc__row">
+          <h3 class="svc__name">Бронеплёнка на фары и ручки</h3>
+          <p class="svc__what">Прозрачная защита там, где чаще всего появляются сколы и царапины от ногтей.</p>
+          <p class="svc__price">по фото</p>
+        </li>
+        <li class="svc__row">
+          <h3 class="svc__name">Антихром и тонировка оптики</h3>
+          <p class="svc__what">Закрываем хромированные молдинги чёрным, притемняем фары и фонари.</p>
+          <p class="svc__price">по фото</p>
+        </li>
+        <li class="svc__row">
+          <h3 class="svc__name">Химчистка салона и кожи</h3>
+          <p class="svc__what">Сухая и влажная чистка, уход за кожей, удаление запахов и озонирование.</p>
+          <p class="svc__price">по фото</p>
+        </li>
+        <li class="svc__row">
+          <h3 class="svc__name">Мойка двигателя</h3>
+          <p class="svc__what">Аккуратно отмываем моторный отсек и консервируем пластик.</p>
+          <p class="svc__price">по фото</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- РАБОТЫ -->
+  <section class="works" id="works" aria-labelledby="worksTitle">
+    <div class="works__in">
+      <h2 class="h2" id="worksTitle">Работы</h2>
+
+      <article class="case">
+        <div class="case__text">
+          <h3 class="h3 case__title">Mercedes A-класс в хамелеон</h3>
+          <p>Плёнка меняет оттенок от вишнёвого до фиолетового в зависимости от угла и света. Листайте фото вбок.</p>
+          <p class="case__meta">Оклейка, антихром, тонировка оптики</p>
+        </div>
+        <div class="reel" id="reel" tabindex="0" aria-label="Фото Mercedes A-класса, листаются вбок">
+          <button class="reel__item" type="button" data-full="assets/images/a-class-side.jpg"><img src="assets/images/a-class-side.jpg" alt="Mercedes A-класс в плёнке хамелеон, вид сзади сбоку" width="1050" height="1400"></button>
+          <button class="reel__item" type="button" data-full="assets/images/a-class-front.jpg"><img src="assets/images/a-class-front.jpg" alt="Mercedes A-класс, вид спереди" width="1050" height="1400"></button>
+          <button class="reel__item" type="button" data-full="assets/images/a-class-rear.jpg"><img src="assets/images/a-class-rear.jpg" alt="Mercedes A-класс у ворот бокса" loading="lazy" width="1050" height="1400"></button>
+          <button class="reel__item" type="button" data-full="assets/images/a-class-door.jpg"><img src="assets/images/a-class-door.jpg" alt="Задняя дверь и стёкла с антихромом" loading="lazy" width="1050" height="1400"></button>
+          <button class="reel__item" type="button" data-full="assets/images/a-class-hatch.jpg"><img src="assets/images/a-class-hatch.jpg" alt="Задний фонарь, притемнённый плёнкой" loading="lazy" width="1050" height="1400"></button>
+          <button class="reel__item" type="button" data-full="assets/images/a-class-glass.jpg"><img src="assets/images/a-class-glass.jpg" alt="Стойка и зеркало, переход цвета хамелеона" loading="lazy" width="1050" height="1400"></button>
+        </div>
+      </article>
+
+      <div class="grid">
+        <figure class="tile tile--wide">
+          <button class="tile__btn" type="button" data-full="assets/images/harrier-pink.jpg"><img src="assets/images/harrier-pink.jpg" alt="Toyota Harrier в розовом глянце" loading="lazy" width="1024" height="1024"></button>
+          <figcaption><b>Toyota Harrier</b> розовый глянец</figcaption>
+        </figure>
+        <figure class="tile">
+          <button class="tile__btn" type="button" data-full="assets/images/c-class-emerald.jpg"><img src="assets/images/c-class-emerald.jpg" alt="Mercedes C-класс в изумрудной плёнке" loading="lazy" width="853" height="1280"></button>
+          <figcaption><b>Mercedes C-класс</b> изумрудный глянец</figcaption>
+        </figure>
+        <figure class="tile">
+          <button class="tile__btn" type="button" data-full="assets/images/shuttle-sand.jpg"><img src="assets/images/shuttle-sand.jpg" alt="Honda Shuttle в песочной плёнке" loading="lazy" width="853" height="1280"></button>
+          <figcaption><b>Honda Shuttle</b> песочный глянец</figcaption>
+        </figure>
+        <figure class="tile">
+          <button class="tile__btn" type="button" data-full="assets/images/granta-matte.jpg"><img src="assets/images/granta-matte.jpg" alt="Lada Granta в матовой графитовой плёнке" loading="lazy" width="960" height="1280"></button>
+          <figcaption><b>Lada Granta</b> матовый графит</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК РАБОТАЕМ -->
+  <section class="process" id="process" aria-labelledby="procTitle">
+    <div class="process__in">
+      <h2 class="h2" id="procTitle">Как проходит работа</h2>
+      <ol class="steps">
+        <li><h3>Присылаете фото</h3><p>Пару снимков машины в Telegram и что хотите сделать.</p></li>
+        <li><h3>Называем цену и срок</h3><p>Подбираем плёнку или состав, договариваемся о дне.</p></li>
+        <li><h3>Оставляете машину</h3><p>Работаем в тёплом боксе на Лучистой, 101.</p></li>
+        <li><h3>Получаете фотоотчёты</h3><p>Каждый день присылаем, на каком этапе машина. Не нужно звонить и спрашивать.</p></li>
+        <li><h3>Забираете машину</h3><p>Осматриваете результат вместе с мастером и получаете советы по уходу.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ОТЗЫВЫ -->
+  <section class="reviews" id="reviews" aria-labelledby="revTitle">
+    <div class="reviews__in">
+      <div class="score">
+        <p class="score__num">4,8</p>
+        <p class="score__txt">средняя оценка в 2ГИС<br>по 124 оценкам клиентов</p>
+        <a class="link" href="https://2gis.ru/khabarovsk/firm/70000001075826889/tab/reviews" target="_blank" rel="noopener">Читать все отзывы в 2ГИС</a>
+      </div>
+      <div class="said">
+        <h2 class="h2" id="revTitle">Что пишут клиенты</h2>
+        <p class="said__note">Коротко пересказали отзывы из 2ГИС.</p>
+        <ul class="said__list">
+          <li><b>Вадим</b><p>Из салона ушёл стойкий запах рыбы. Сделали глубокую химчистку, двигатель помыли бонусом и каждый день присылали фото.</p></li>
+          <li><b>Данил</b><p>После полировки на Honda Vezel почти не осталось царапин, мастер очень доволен результатом.</p></li>
+          <li><b>Риночка</b><p>Приехала за 500 км ради керамики на Prado. Понравилось, что отчёты о работе приходили без напоминаний.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ -->
+  <section class="contacts" id="contacts" aria-labelledby="contTitle">
+    <div class="contacts__in">
+      <h2 class="contacts__title" id="contTitle">Приезжайте или напишите</h2>
+      <div class="contacts__grid">
+        <div class="addr">
+          <p class="addr__city">Хабаровск</p>
+          <p class="addr__street" id="addrText">ул. Лучистая, 101</p>
+          <div class="addr__row">
+            <button class="btn btn--ghost" type="button" id="copyAddr">Скопировать адрес</button>
+            <a class="btn btn--ghost" href="https://2gis.ru/khabarovsk/firm/70000001075826889" target="_blank" rel="noopener">Открыть в 2ГИС</a>
+          </div>
+          <p class="addr__ok" id="copyOk" role="status" aria-live="polite"></p>
+        </div>
+        <div class="tg">
+          <a class="tg__link" href="https://t.me/freshstudio27" target="_blank" rel="noopener">
+            <span class="tg__name">@freshstudio27</span>
+            <span class="tg__what">Telegram студии: запись и расчёт</span>
+          </a>
+          <a class="tg__link" href="https://t.me/freshdetaling" target="_blank" rel="noopener">
+            <span class="tg__name">@freshdetaling</span>
+            <span class="tg__what">Канал с работами</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__in">
+    <p>Fresh Studio, детейлинг в Хабаровске</p>
+    <p class="foot__credit">Сайт разработан в&nbsp;<a href="https://studio-psi-olive.vercel.app/" target="_blank" rel="noopener">студии Сайтика</a></p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__close" type="button" id="lbClose" aria-label="Закрыть фото">×</button>
+  <img id="lbImg" src="" alt="">
+</div>
+
+<div class="cookie" id="cookie" hidden>
+  <p>Сайт использует cookie, чтобы работать корректно.</p>
+  <button class="btn btn--film" type="button" id="cookieOk">Понятно</button>
+</div>
+
+<script src="assets/js/main.js"></script>
+
+</body></html>
