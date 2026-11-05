@@ -18,9 +18,9 @@
     { name: "песочный глянец", car: "Honda Shuttle", img: "assets/images/shuttle-sand.jpg", w: 853, h: 1280,
       c: "linear-gradient(160deg,#ecd4b8,#d2b08c 55%,#a8825c)", film: "#c9a179", l: "#7f5a35", d: "#e2c19c", on: "#2b2016", t: "#3a2a1b", gloss: 1,
       alt: "Honda Shuttle в песочной плёнке" },
-    { name: "матовый графит", car: "Lada Granta", img: "assets/images/granta-matte.jpg", w: 960, h: 1280,
+    { name: "матовый графит", car: "Lexus", img: "assets/images/granta-matte.jpg", w: 960, h: 1280,
       c: "#33373a", film: "#33373a", l: "#2c3033", d: "#b9c0c4", on: "#ffffff", t: "#e4e6e6", gloss: 0.12,
-      alt: "Lada Granta в матовой графитовой плёнке" }
+      alt: "Lexus GS в матовой графитовой плёнке" }
   ];
 
   var fan = document.getElementById("fan");
@@ -119,8 +119,8 @@
       alt: "Капот Mercedes A-класса в глянцевой плёнке хамелеон",
       note: "Глянец отражает свет как свежий лак, оттенок играет на изгибах кузова." },
     matte: { price: 90000, img: "assets/images/granta-matte.jpg", w: 960, h: 1280,
-      alt: "Lada Granta в матовой графитовой плёнке",
-      note: "Мат гасит блики и подчёркивает форму кузова. Пример матовой плёнки на Lada Granta." }
+      alt: "Lexus GS в матовой графитовой плёнке",
+      note: "Мат гасит блики и подчёркивает форму кузова. Пример матовой плёнки на Lexus GS." }
   };
   var shownPrice = 110000;
 

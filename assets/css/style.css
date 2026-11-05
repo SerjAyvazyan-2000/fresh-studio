@@ -391,3 +391,36 @@ p { margin: 0; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
   html { scroll-behavior: auto; }
 }
+
+
+/* ===== Контакты: запись и канал (правка) ===== */
+.reach { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-content: start; }
+.reach__card {
+  position: relative; display: flex; flex-direction: column; gap: 12px; min-width: 0; min-height: 320px;
+  padding: 26px 24px 24px; border-radius: 4px; text-decoration: none;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+.reach__card:hover { transform: translateY(-6px); }
+.reach__card--book { background: var(--band-fg); color: var(--band); }
+.reach__card--book:hover { box-shadow: 0 22px 44px -18px var(--film); }
+.reach__card--feed { border: 2px solid var(--band-soft); color: var(--band-fg); }
+.reach__card--feed:hover { border-color: var(--band-fg); }
+.reach__tag { position: absolute; top: 18px; right: 18px; padding: 4px 10px; border-radius: 2px; font-size: .8rem; font-weight: 600; border: 1.5px solid currentColor; opacity: .7; }
+.reach__icon { display: grid; place-items: center; width: 60px; height: 60px; border-radius: 4px; background: var(--film); color: var(--on-film); transition: background-color .6s var(--ease), transform .35s var(--ease); }
+.reach__card--book:hover .reach__icon { transform: rotate(-6deg) scale(1.06); }
+.reach__thumbs { display: flex; height: 84px; padding-left: 6px; }
+.reach__thumbs img { width: 64px; height: 84px; object-fit: cover; border-radius: 3px; border: 2px solid var(--band); margin-left: -16px; transition: transform .45s var(--ease), margin .45s var(--ease); }
+.reach__thumbs img:first-child { margin-left: 0; transform: rotate(-8deg); }
+.reach__thumbs img:nth-child(2) { transform: translateY(-4px); z-index: 1; }
+.reach__thumbs img:nth-child(3) { transform: rotate(8deg); }
+.reach__card--feed:hover .reach__thumbs img { margin-left: 6px; transform: none; }
+.reach__card--feed:hover .reach__thumbs img:first-child { margin-left: 0; }
+.reach__title { font-family: var(--display); font-size: var(--step-2); line-height: 1.08; margin-top: 4px; }
+.reach__text { opacity: .78; max-width: 32ch; }
+.reach__go { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; font-weight: 600; padding-top: 14px; border-top: 1.5px solid currentColor; }
+.reach__card--book .reach__go { border-top-color: var(--film); }
+.reach__go span { min-width: 0; overflow-wrap: anywhere; }
+.reach__go svg { flex: none; transition: transform .35s var(--ease); }
+.reach__card:hover .reach__go svg { transform: translateX(6px); }
+@media (max-width: 1080px) and (min-width: 901px) { .reach { grid-template-columns: minmax(0, 1fr); } .reach__card { min-height: 0; } }
+@media (max-width: 620px) { .reach { grid-template-columns: minmax(0, 1fr); } .reach__card { min-height: 0; } }
