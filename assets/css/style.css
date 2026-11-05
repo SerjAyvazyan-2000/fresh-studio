@@ -128,16 +128,18 @@ p { margin: 0; }
 .hero__in {
   position: relative; z-index: 1; max-width: var(--max); margin: 0 auto;
   padding-left: var(--gut); padding-right: var(--gut-r);
-  display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 48px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 28px 56px; align-items: end;
 }
-.hero__copy { display: grid; gap: 26px; min-width: 0; }
+.hero__head { display: grid; gap: 22px; min-width: 0; }
+.hero__side { display: grid; gap: 22px; min-width: 0; padding-bottom: 10px; }
+.hero__shine { grid-column: 1 / -1; margin-top: 20px; }
 .kicker { display: inline-flex; align-items: center; gap: 10px; font-weight: 600; color: #d9e2d6; }
 .spark { width: 16px; height: 16px; fill: var(--neon); filter: drop-shadow(0 0 6px var(--neon)); animation: twinkle 2.6s ease-in-out infinite; }
 @keyframes twinkle { 50% { transform: scale(.6) rotate(45deg); opacity: .6; } }
 
 .hero__title {
   font-family: var(--display); font-style: italic; font-weight: 900; text-transform: uppercase;
-  font-size: var(--h1); line-height: .88; letter-spacing: -0.02em; display: grid;
+  font-size: clamp(3.1rem, 7.4vw, 7rem); line-height: .88; letter-spacing: -0.02em; display: grid;
 }
 .hero__title .ln { display: block; overflow: hidden; padding: .14em .12em .06em 0; margin: -.1em -.12em 0 0; }
 .hero__title .ln > span {
@@ -161,16 +163,32 @@ p { margin: 0; }
 /* polish toy */
 .hero__shine { position: relative; min-width: 0; }
 .hero__shine::before {
-  content: ""; position: absolute; inset: 8% -6% -4% 6%; z-index: -1; border-radius: 40px;
+  content: ""; position: absolute; inset: 14% 4% -6% 4%; z-index: -1; border-radius: 40px;
   background: radial-gradient(closest-side, rgba(77, 252, 18, .35), transparent); filter: blur(30px);
 }
 .polish {
-  position: relative; aspect-ratio: 4 / 5; border-radius: 24px; overflow: hidden;
+  position: relative; aspect-ratio: 2 / 1; border-radius: 28px; overflow: hidden;
   background: var(--card); box-shadow: 0 0 0 1px rgba(77, 252, 18, .35), 0 40px 80px -30px rgba(0,0,0,.8);
   touch-action: pan-y; cursor: crosshair;
 }
 .polish__img, .polish__dust { position: absolute; inset: 0; width: 100%; height: 100%; }
-.polish__img { object-fit: cover; }
+.polish__img { object-fit: cover; filter: contrast(1.08) saturate(1.15); }
+/* глянец, который видно только на отполированной машине */
+.polish__gloss {
+  position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+  -webkit-mask: url("../images/amg-gt-r-mask.png") center / cover no-repeat;
+          mask: url("../images/amg-gt-r-mask.png") center / cover no-repeat;
+  background:
+    linear-gradient(112deg, transparent 38%, rgba(255,255,255,.42) 47%, rgba(255,255,255,.08) 52%, transparent 60%) 0 0 / 320% 100% no-repeat,
+    linear-gradient(180deg, rgba(255,255,255,.16), transparent 42%, transparent 70%, rgba(77,252,18,.10));
+  animation: gloss 4.5s ease-in-out infinite;
+}
+@keyframes gloss { 0% { background-position: 110% 0, 0 0; } 60%, 100% { background-position: -10% 0, 0 0; } }
+.polish__model {
+  position: absolute; right: 18px; bottom: 18px; padding: 8px 14px; border-radius: 999px; pointer-events: none;
+  background: rgba(6, 9, 7, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-family: var(--display); font-style: italic; font-weight: 900; text-transform: uppercase; font-size: .85rem; letter-spacing: .02em;
+}
 .polish__sheen {
   position: absolute; inset: -30% -80%; pointer-events: none; opacity: 0;
   background: linear-gradient(105deg, transparent 42%, rgba(255,255,255,.45) 50%, transparent 58%);
@@ -184,6 +202,8 @@ p { margin: 0; }
   border: 1px solid rgba(77, 252, 18, .5); font-weight: 600; font-size: .92rem; pointer-events: none;
   transition: opacity .4s, transform .4s var(--ease);
 }
+.hint-short { display: none; }
+@media (max-width: 640px) { .hint-long { display: none; } .hint-short { display: inline; } }
 .polish__hint svg { width: 22px; height: 22px; flex: none; fill: none; stroke: var(--neon); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: nudge 1.6s ease-in-out infinite; }
 @keyframes nudge { 50% { transform: translateX(6px) rotate(-8deg); } }
 .polish.is-touched .polish__hint { opacity: 0; transform: translate(-50%, 10px); }
@@ -196,6 +216,23 @@ p { margin: 0; }
 .polish__bar i { display: block; height: 100%; width: 0; background: var(--neon); box-shadow: 0 0 10px var(--neon); transition: width .2s; }
 .polish__val { min-width: 3ch; font-variant-numeric: tabular-nums; color: var(--neon); }
 .polish__bursts { position: absolute; inset: 0; pointer-events: none; }
+/* полировальная машинка под курсором */
+.pad { position: absolute; left: 0; top: 0; z-index: 3; pointer-events: none; opacity: 0; transition: opacity .25s; will-change: transform; }
+.pad.is-on { opacity: 1; }
+.pad::before { content: ""; position: absolute; inset: -6%; border-radius: 50%; background: #0b0f0c; box-shadow: 0 10px 24px rgba(0,0,0,.55), 0 0 0 2px rgba(77,252,18,.7), 0 0 26px rgba(77,252,18,.45); }
+.pad i {
+  position: absolute; inset: 4%; border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #0b0f0c 0 12%, #2a3a2c 13% 16%, transparent 17%),
+    repeating-conic-gradient(from 0deg, rgba(0,0,0,.28) 0 6deg, rgba(255,255,255,.08) 6deg 12deg),
+    radial-gradient(circle at 35% 30%, #a8ff7c, #4dfc12 45%, #2a9a06 100%);
+  animation: padspin .18s linear infinite; animation-play-state: paused;
+}
+.pad.is-spin i { animation-play-state: running; }
+@keyframes padspin { to { transform: rotate(360deg); } }
+.fleck { position: absolute; width: 3px; height: 3px; margin: -1.5px 0 0 -1.5px; border-radius: 50%; background: #e9eee6; animation: fleck .7s ease-out forwards; }
+@keyframes fleck { to { transform: translate(var(--dx), var(--dy)); opacity: 0; } }
+@media (pointer: fine) { .polish:not(.is-done) { cursor: none; } }
 .burst { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; background: #fff; animation: pop 1s var(--ease) forwards;
   clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); filter: drop-shadow(0 0 6px #fff); }
 @keyframes pop { 0% { transform: scale(0) rotate(0); opacity: 1; } 60% { transform: scale(1.2) rotate(60deg); opacity: 1; } 100% { transform: scale(0) rotate(120deg); opacity: 0; } }
@@ -470,9 +507,12 @@ p { margin: 0; }
 
   .hero { padding-top: 100px; padding-bottom: 50px; }
   .hero__in, .cfg, .quiz__in, .reviews__in, .faq__in { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .hero__in { gap: 22px; }
+  .hero__shine { margin-top: 6px; }
   .sec__head { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-bottom: 36px; }
   .sec__head--row { grid-template-columns: 1fr auto; align-items: end; }
-  .polish { aspect-ratio: 1 / 1; }
+  .polish { aspect-ratio: 3 / 2; border-radius: 20px; }
+  .polish__model { display: none; }
   .quiz__side { position: static; }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 240px; }
   .svc--xl { grid-column: span 2; grid-row: span 1; }
@@ -481,6 +521,10 @@ p { margin: 0; }
 }
 @media (max-width: 640px) {
   .hero__cta .btn { width: 100%; }
+  .polish__hint { bottom: 10px; padding: 6px 12px; font-size: .78rem; gap: 6px; }
+  .polish__hint svg { width: 16px; height: 16px; }
+  .polish__meter { left: 10px; top: 10px; padding: 5px 10px; font-size: .75rem; gap: 6px; }
+  .polish__bar { width: 56px; }
   .proof { gap: 12px 22px; }
   .proof b { font-size: 1.3rem; }
   .bento { grid-template-columns: minmax(0, 1fr); grid-auto-rows: 230px; }

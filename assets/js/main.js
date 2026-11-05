@@ -20,17 +20,17 @@
 
   // силуэт машины: только по нему лежит пыль и считается блеск
   var carMask = new Image();
-  carMask.src = "assets/images/harrier-car-mask.png";
-  var GRID_N = 64, GRID_HEX = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffc0000000001fffffe0000000007ffffff000000000fffffff800000003fffffffc00000007fffffffc0000003ffffffffe0000003ffffffffe000000ffffffffff000007ffffffffff00003fffffffffff0000ffffffffffff8001ffffffffffff0007ffffffffffff000fffffffffffff800fffffffffffff800fffffffffffff803fffffffffffffc07fffffffffffffc0ffffffffffffffc0ffffffffffffff80ffffffffffffff81ffffffffffffe781ffffffffffffe301ffffffffffffe000ffffffffffffe0007fffffffffffe000fffffffffffff000fffffffffffff000fffffffffffff001fffffffffffff001fffffffffffff000fffffffffffff000fffffffffffff0003ffffffffffff0000fffffffffffe00001ffffffffffe000003ffffffc3fe0000007ffffc03fc00000007ff8001f800000000000000f80000000000000000000000000000000000000000000000000000000000000000000000000000000000";
+  carMask.src = "assets/images/amg-gt-r-mask.png";
+  var GW = 72, GH = 48, GRID_HEX = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000fff80000000000007fffffe00000000000fffffff00000000001fffffff80000000033fffffffc000000003ffffffffff00000007fffffffffe0001fffffffffffffe000fffffffffffffff003fffffffffffffff00ffffffffffffffff80ffffffffffffffffc0ffffffffffffffffc1ffffffffffffffffc1ffffffffffffffffc3ffffffffffffffff83ffffffffffffffff83ffffffffffffffff83ffffffffffffffff83ffffffffffffffff81ffffffffffffe1ff00ffffffffff0000fe00000ffc07fc0000000000000003f80000000000000001f00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000";
   var carGrid = [];
   for (var gi = 0; gi < GRID_HEX.length; gi++) {
     var nib = parseInt(GRID_HEX[gi], 16);
     carGrid.push(!!(nib & 8), !!(nib & 4), !!(nib & 2), !!(nib & 1));
   }
   function onCar(x, y) {
-    var ix = Math.floor((x - rect[0]) / rect[2] * GRID_N), iy = Math.floor((y - rect[1]) / rect[3] * GRID_N);
-    if (ix < 0 || iy < 0 || ix >= GRID_N || iy >= GRID_N) return false;
-    return carGrid[iy * GRID_N + ix];
+    var ix = Math.floor((x - rect[0]) / rect[2] * GW), iy = Math.floor((y - rect[1]) / rect[3] * GH);
+    if (ix < 0 || iy < 0 || ix >= GW || iy >= GH) return false;
+    return carGrid[iy * GW + ix];
   }
 
   function coverRect(iw, ih, w, h) {
@@ -51,14 +51,14 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.globalCompositeOperation = "source-over";
     ctx.globalAlpha = 1;
-    var c = coverRect(pImg.naturalWidth || 1024, pImg.naturalHeight || 1024, W, H);
+    var c = coverRect(pImg.naturalWidth || 1800, pImg.naturalHeight || 1200, W, H);
     rect = c;
     ctx.drawImage(pImg, c[0], c[1], c[2], c[3]);
     // тусклый, выгоревший кузов
     ctx.globalCompositeOperation = "saturation";
     ctx.globalAlpha = 0.82; ctx.fillStyle = "#808080"; ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = "source-over";
-    ctx.globalAlpha = 0.42; ctx.fillStyle = "#1c211c"; ctx.fillRect(0, 0, W, H);
+    ctx.globalAlpha = 0.5; ctx.fillStyle = "#23251f"; ctx.fillRect(0, 0, W, H);
     ctx.globalAlpha = 0.16; ctx.fillStyle = "#c9cfc4"; ctx.fillRect(0, 0, W, H);
     // пыль и разводы
     var rnd = rand(42);
@@ -72,12 +72,18 @@
       ctx.strokeStyle = "rgba(220,224,215," + (0.08 + rnd() * 0.12).toFixed(2) + ")";
       ctx.beginPath(); ctx.arc(rnd() * W, rnd() * H, 4 + rnd() * 16, 0, 6.283); ctx.stroke();
     }
-    // разводы-«паутинка» от плохой мойки
-    for (var k = 0; k < 60; k++) {
-      var cx = rnd() * W, cy = rnd() * H, rr = 20 + rnd() * 60;
-      ctx.strokeStyle = "rgba(230,232,225,0.07)";
-      ctx.beginPath(); ctx.arc(cx, cy, rr, rnd() * 6, rnd() * 6 + 1.2); ctx.stroke();
+    // «паутинка» и голограммы: тонкие круговые царапины вокруг бликов
+    for (var k = 0; k < 14; k++) {
+      var cx = rect[0] + rect[2] * (0.08 + rnd() * 0.84), cy = rect[1] + rect[3] * (0.3 + rnd() * 0.5);
+      for (var q = 0; q < 34; q++) {
+        var rr = 6 + rnd() * W * 0.13, st = rnd() * 6.283;
+        ctx.strokeStyle = "rgba(235,238,230," + (0.05 + rnd() * 0.12).toFixed(2) + ")";
+        ctx.lineWidth = rnd() < 0.15 ? 1.2 : 0.6;
+        ctx.beginPath(); ctx.arc(cx, cy, rr, st, st + 0.3 + rnd() * 1.1); ctx.stroke();
+      }
     }
+    // матовая плёнка грязи сверху
+    ctx.globalAlpha = 0.24; ctx.fillStyle = "#a9a493"; ctx.fillRect(0, 0, W, H); ctx.globalAlpha = 1;
     // оставляем пыль только на машине
     if (carMask.complete && carMask.naturalWidth) {
       ctx.globalCompositeOperation = "destination-in";
@@ -85,7 +91,7 @@
       ctx.drawImage(carMask, c[0], c[1], c[2], c[3]);
       ctx.globalCompositeOperation = "source-over";
     }
-    cells = new Array(COLS * ROWS).fill(false); cleaned = 0;
+    cells = new Array(COLS * ROWS).fill(0); cleaned = 0;
     eligible = []; total = 0;
     for (var a = 0; a < ROWS; a++) for (var b = 0; b < COLS; b++) {
       var ok = onCar((b + 0.5) * W / COLS, (a + 0.5) * H / ROWS);
@@ -95,12 +101,12 @@
     updateMeter();
   }
 
-  function brushR() { return Math.max(28, W * 0.085); }
+  function brushR() { return Math.max(24, Math.min(W, H * 1.6) * 0.045); }
 
   function stamp(x, y) {
     var r = brushR();
     var g = ctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(0.6, "rgba(0,0,0,.85)"); g.addColorStop(1, "rgba(0,0,0,0)");
+    g.addColorStop(0, "rgba(0,0,0,.34)"); g.addColorStop(0.55, "rgba(0,0,0,.26)"); g.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = g;
     ctx.beginPath(); ctx.arc(x, y, r, 0, 6.283); ctx.fill();
     // отметить клетки
@@ -110,7 +116,10 @@
     for (var a = r0; a <= r1; a++) for (var b = c0; b <= c1; b++) {
       var dx = (b + 0.5) * cw - x, dy = (a + 0.5) * ch - y;
       var idx = a * COLS + b;
-      if (dx * dx + dy * dy <= rc * rc && eligible[idx] && !cells[idx]) { cells[idx] = true; cleaned++; }
+      if (dx * dx + dy * dy <= rc * rc && eligible[idx] && cells[idx] < 1) {
+        cells[idx] += 0.2;
+        if (cells[idx] >= 1) cleaned++;
+      }
     }
   }
 
@@ -127,10 +136,10 @@
   function pct() { return Math.round(cleaned / total * 100); }
 
   function updateMeter() {
-    var p = finished ? 100 : Math.min(99, Math.round(pct() / 0.7));
+    var p = finished ? 100 : Math.min(99, Math.round(pct() / 0.6));
     bar.style.width = p + "%";
     val.textContent = p + "%";
-    if (!finished && pct() >= 70) finish();
+    if (!finished && pct() >= 60) finish();
   }
 
   function burstAt(x, y) {
@@ -149,6 +158,7 @@
     updateMeter();
     canvas.style.transition = "opacity .8s ease";
     canvas.style.opacity = "0";
+    pad.classList.remove("is-on");
     polish.classList.add("is-done", "is-touched");
     done.hidden = false;
     for (var i = 0; i < 9; i++) (function (i) {
@@ -166,15 +176,39 @@
     return { x: e.clientX - r.left, y: e.clientY - r.top };
   }
 
+  var pad = document.getElementById("pad"), spinT = 0;
+  function movePad(p) {
+    var s = brushR() * 2.1;
+    pad.style.width = pad.style.height = s + "px";
+    pad.style.transform = "translate(" + (p.x - s / 2) + "px," + (p.y - s / 2) + "px)";
+    pad.classList.add("is-on", "is-spin");
+    clearTimeout(spinT);
+    spinT = setTimeout(function () { pad.classList.remove("is-spin"); }, 160);
+  }
+  function fleck(x, y) { // пыль, которая летит из-под машинки
+    if (reduce) return;
+    var f = document.createElement("span");
+    f.className = "fleck";
+    var a = Math.random() * 6.283, d = brushR() * (1.2 + Math.random());
+    f.style.left = x + "px"; f.style.top = y + "px";
+    f.style.setProperty("--dx", Math.cos(a) * d + "px");
+    f.style.setProperty("--dy", Math.sin(a) * d + "px");
+    bursts.appendChild(f);
+    setTimeout(function () { f.remove(); }, 700);
+  }
   function onMove(e) {
     if (finished) return;
-    if (e.pointerType === "touch" && e.buttons === 0 && e.type !== "pointerdown") return;
     var p = pos(e);
+    if (e.pointerType !== "touch" || e.buttons) movePad(p);
+    if (e.pointerType === "touch" && e.buttons === 0 && e.type !== "pointerdown") return;
     if (!touched) { touched = true; polish.classList.add("is-touched"); }
     erase(last || p, p);
     last = p;
-    var now = Date.now();
-    if (now - lastBurst > 140 && onCar(p.x, p.y)) { lastBurst = now; burstAt(p.x, p.y); }
+    if (onCar(p.x, p.y)) {
+      fleck(p.x, p.y);
+      var now = Date.now();
+      if (now - lastBurst > 220) { lastBurst = now; burstAt(p.x + (Math.random() - .5) * brushR(), p.y + (Math.random() - .5) * brushR()); }
+    }
   }
 
   if (canvas && ctx) {
@@ -182,8 +216,9 @@
       paintDust();
       canvas.addEventListener("pointerdown", function (e) { last = pos(e); onMove(e); });
       canvas.addEventListener("pointermove", onMove);
-      canvas.addEventListener("pointerleave", function () { last = null; });
-      canvas.addEventListener("pointerup", function () { last = null; });
+      canvas.addEventListener("pointerleave", function () { last = null; pad.classList.remove("is-on"); });
+      canvas.addEventListener("pointerup", function (e) { last = null; if (e.pointerType === "touch") pad.classList.remove("is-on"); });
+      canvas.addEventListener("pointercancel", function () { last = null; pad.classList.remove("is-on"); });
       var rt;
       window.addEventListener("resize", function () {
         clearTimeout(rt);
@@ -200,15 +235,19 @@
 
   function demo() {
     if (touched || finished) return;
-    var t0 = null, dur = 1100, prev = null;
+    var t0 = null, dur = 1600, prev = null;
     function f(ts) {
       if (touched || finished) return;
       if (!t0) t0 = ts;
       var t = Math.min((ts - t0) / dur, 1);
       var e = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      var p = { x: W * (0.12 + 0.76 * e), y: H * (0.62 - 0.22 * Math.sin(e * Math.PI)) };
-      erase(prev || p, p); prev = p;
+      var p = { x: rect[0] + rect[2] * (0.1 + 0.3 * e), y: rect[1] + rect[3] * (0.66 - 0.1 * Math.sin(e * Math.PI)) };
+      for (var k = 0; k < 2; k++) erase(prev || p, p);
+      prev = p;
+      movePad(p);
+      if (onCar(p.x, p.y) && Math.random() < 0.5) fleck(p.x, p.y);
       if (t < 1) requestAnimationFrame(f);
+      else setTimeout(function () { if (!touched) pad.classList.remove("is-on"); }, 300);
     }
     requestAnimationFrame(f);
   }
